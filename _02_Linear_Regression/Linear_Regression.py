@@ -23,16 +23,17 @@ def lasso(data):
     # 读入数据
     X, y = read_data()
     # 超参数
-    alpha = 0.01
-    epoch = 10000
+    alpha = 0.1
+    epoch = 1000
+    lr = 0.001
     # 初始化w
     w = np.zeros(X.shape[1])
     # 梯度下降
     for i in range(epoch):
         # 梯度
-        grad = np.matmul(X.T, np.matmul(X, w) - y) /X.shape[0] + alpha * np.sign(w)
+        grad = np.matmul(X.T, np.matmul(X, w) - y) / X.shape[0] + alpha * np.sign(w)
         # 更新w
-        w -= 0.01 * grad
+        w -= lr * grad
     return np.matmul(w, data)
 
 def read_data(path='./data/exp02/'):
