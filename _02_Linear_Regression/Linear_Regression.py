@@ -12,7 +12,7 @@ def ridge(data):
     # 读入数据
     X, y = read_data()
     # 超参数
-    alpha = 0.013509935211980266
+    alpha = 2
     # 正则化项
     A = alpha * np.eye(X.shape[1])# alpha * I
     # 最小二乘求权重 w = (X^T X + A)^-1 (X^T y)
@@ -30,7 +30,7 @@ def lasso(data):
     # 梯度下降
     for i in range(epoch):
         # 梯度
-        grad = np.matmul(X.T, np.matmul(X, w) - y) / X.shape[0] + alpha * np.sign(w)
+        grad = np.matmul(X.T, np.matmul(X, w) - y) + alpha * np.sign(w)
         # 更新w
         w = w - grad
     return w @ data
