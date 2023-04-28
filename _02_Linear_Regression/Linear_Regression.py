@@ -12,28 +12,28 @@ def ridge(data):
     # 读入数据
     X, y = read_data()
     # 超参数
-    alpha = 2
+    alpha = 0.01
     # 正则化项
     A = alpha * np.eye(X.shape[1])# alpha * I
     # 最小二乘求权重 w = (X^T X + A)^-1 (X^T y)
     w = np.matmul((np.linalg.inv(np.matmul(X.T, X) + A)), np.matmul(X.T, y))
-    return w @ data
+    return np.matmul(w, data)
 # lasso回归
 def lasso(data):
     # 读入数据
     X, y = read_data()
     # 超参数
     alpha = 0.01
-    epoch = 1000
+    epoch = 10000
     # 初始化w
     w = np.zeros(X.shape[1])
     # 梯度下降
     for i in range(epoch):
         # 梯度
-        grad = np.matmul(X.T, np.matmul(X, w) - y) + alpha * np.sign(w)
+        grad = np.matmul(X.T, np.matmul(X, w) - y) /X.shape[0] + alpha * np.sign(w)
         # 更新w
-        w = w - grad
-    return w @ data
+        w -= 0.01 * grad
+    return np.matmul(w, data)
 
 def read_data(path='./data/exp02/'):
     x = np.load(path + 'X_train.npy')
