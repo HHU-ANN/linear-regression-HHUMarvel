@@ -32,7 +32,7 @@ def lasso(data):
         # 梯度
         grad = np.matmul(X.T, np.matmul(X, w) - y) / X.shape[0] + alpha * np.sign(w)
         # 更新w
-        w = w - grad
+        w = w - alpha * grad
     return w @ data
 
 def read_data(path='./data/exp02/'):
@@ -40,4 +40,3 @@ def read_data(path='./data/exp02/'):
     y = np.load(path + 'y_train.npy')
     return x, y
 
-# read_data('../data/exp02/')
