@@ -16,7 +16,7 @@ def ridge(data):
     # 正则化项
     A = alpha * np.eye(X.shape[1])# alpha * I
     # 最小二乘求权重 w = (X^T X + A)^-1 (X^T y)
-    w = np.matmul((np.linalg.inv(np.matmul(X.T, X) + A), np.matmul(X.T,y)))
+    w = np.matmul((np.linalg.inv(np.matmul(X.T, X) + A)), np.matmul(X.T, y))
     return w @ data
 # lasso回归
 def lasso(data):
