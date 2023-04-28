@@ -12,7 +12,7 @@ def ridge(data):
     # 读入数据
     X, y = read_data()
     # 超参数
-    alpha = 0.015
+    alpha = 0.007
     # 正则化项
     A = alpha * np.eye(X.shape[1])# alpha * I
     # 最小二乘求权重 w = (X^T X + A)^-1 (X^T y)
