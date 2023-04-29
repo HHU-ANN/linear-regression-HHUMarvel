@@ -24,8 +24,8 @@ def lasso(data):
     X, y = read_data()
     # 超参数
     alpha = 0.01
-    epoch = 100000
-    lr = 0.01
+    epoch = 10000
+    lr = 0.0001
     # 初始化w
     # w = np.zeros(X.shape[1])
     w = np.zeros(X.shape[1])
@@ -44,7 +44,7 @@ def read_data(path='./data/exp02/'):
     y = np.load(path + 'y_train.npy')
     return x, y
 
-# data = np.array([2.0130000e+03, 8.1000000e+00, 1.0481010e+02, 5.0000000e+00, 2.4966740e+01, 1.2154067e+02])
+# data = np.array([2.0130000e+03, 1.3700000e+01, 4.0820150e+03, 0.0000000e+00, 2.4941550e+01, 1.2150381e+02])
 # # print(ridge(data))
 # # X, y = read_data()
 # # # 超参数
@@ -65,7 +65,7 @@ def read_data(path='./data/exp02/'):
 #
 # alpha = 0.01
 # epoch = 100000
-# lr = 0.01
+# lr = 0.0001
 # # 初始化w
 # w = np.zeros((X.shape[1]))
 # # 梯度下降
