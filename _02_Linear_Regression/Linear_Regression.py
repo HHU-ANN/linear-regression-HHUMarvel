@@ -39,7 +39,7 @@ def lasso(data):
         w -= lr * grad
     return np.matmul(w, data)
 
-def read_data(path='../data/exp02/'):
+def read_data(path='./data/exp02/'):
     x = np.load(path + 'X_train.npy')
     y = np.load(path + 'y_train.npy')
     return x, y
