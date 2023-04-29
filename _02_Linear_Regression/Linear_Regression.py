@@ -12,7 +12,7 @@ def ridge(data):
     # 读入数据
     X, y = read_data()
     # 超参数
-    alpha = 0.01
+    alpha = 0.01899999
     # 正则化项
     A = alpha * np.eye(X.shape[1])# alpha * I
     # 最小二乘求权重 w = (X^T X + A)^-1 (X^T y)
@@ -23,11 +23,12 @@ def lasso(data):
     # 读入数据
     X, y = read_data()
     # 超参数
-    alpha = 0.1
+    alpha = 0.01
     epoch = 1000
     lr = 0.001
     # 初始化w
-    w = np.zeros(X.shape[1])
+    # w = np.zeros(X.shape[1])
+    w = np.ones(X.shape[1]) * 0.01
     # 梯度下降
     for i in range(epoch):
         # 梯度
@@ -36,8 +37,48 @@ def lasso(data):
         w -= lr * grad
     return np.matmul(w, data)
 
-def read_data(path='./data/exp02/'):
+def read_data(path='../data/exp02/'):
     x = np.load(path + 'X_train.npy')
     y = np.load(path + 'y_train.npy')
     return x, y
+
+data = np.array([2.0135000e+03, 6.5000000e+00, 9.0456060e+01, 9.0000000e+00, 2.4974330e+01, 1.2154310e+02])
+# print(ridge(data))
+# X, y = read_data()
+# # 超参数
+# canshu = np.linspace(0.013, 0.014, 1000)
+# # 正则化项
+# for alpha in canshu:
+#     A = alpha * np.eye(X.shape[1])# alpha * I
+#     # 最小二乘求权重 w = (X^T X + A)^-1 (X^T y)
+#     w = np.matmul((np.linalg.inv(np.matmul(X.T, X) + A)), np.matmul(X.T, y))
+#     print(np.matmul(w, data))
+#
+# A = 0.016399999 * np.eye(X.shape[1])# alpha * I
+# # 最小二乘求权重 w = (X^T X + A)^-1 (X^T y)
+# w = np.matmul((np.linalg.inv(np.matmul(X.T, X) + A)), np.matmul(X.T, y))
+# print(np.matmul(w, data))
+
+X, y = read_data()
+
+alpha = 0.01
+epoch = 100000
+lr = 0.01
+# 初始化w
+w = np.zeros((X.shape[1]))
+# 梯度下降
+for i in range(epoch):
+    # 梯度
+    grad = np.matmul(X.T, np.matmul(X, w) - y) / X.shape[0] + alpha * np.sign(w)
+    grad_norm = np.linalg.norm(grad)
+    if grad_norm > 1:
+        grad /= grad_norm
+    # print(grad)
+    # 更新w
+    w -= lr * grad
+print(np.matmul(w, data))
+# print(X.shape)
+# print(y.shape)
+# print(w.shape)
+# print((np.matmul(X.T, np.matmul(X, w) - y)).shape)
 
